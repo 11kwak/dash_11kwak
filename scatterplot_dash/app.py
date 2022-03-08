@@ -30,7 +30,7 @@ app.layout = html.Div([
         html.Div([
             # Map-legend
             html.Ul([
-                html.Li("내진설계 적용", className='circle', style={'background': '#3c979a','color':'black',
+                html.Li("내진설계 적용", className='circle', style={'background': '#1531a3','color':'black',
                     'list-style':'none','text-indent': '17px','white-space':'nowrap'}),  
                 html.Li("내진설계 미적용", className='circle', style={'background': '#f54242','color':'black',
                     'list-style':'none','text-indent': '17px','white-space':'nowrap'}), 
@@ -113,7 +113,7 @@ def update_figure(chosen_boro,chosen_recycling):
             clickmode= 'event+select',
             hovermode='closest',
             hoverdistance=2,
-            title=dict(text="scatterplot dash 탬플릿입니다.",font=dict(size=50, color='green')),
+            title=dict(text="Kalis 12종 시설물 교량 상세제원 현황",font=dict(size=50, color='green')),
             mapbox=dict(
                 accesstoken=mapbox_access_token,
                 bearing=25,

@@ -31,7 +31,7 @@ def color_add(df):
     print("현재 컬럼명 : ",df.columns)
     time.sleep(1)
     target_col = input("색깔을 구분할 컬럼명을 입력하세요 :")
-    df[f"{target_col}"].fillna("결측치")
+    df[f"{target_col}"].fillna("결측치",inplace=True)
 
     target_col_values = df[f"{target_col}"].unique()
     print(f"색깔을 지정해줄 값들입니다 : {target_col_values}")
