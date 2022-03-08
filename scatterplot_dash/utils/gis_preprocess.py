@@ -65,7 +65,9 @@ def col_plus_col(df):
 
     for i in tqdm(range(len(df.index))):
         for j in range(len(column_list)):
-            df.loc[i, "hovertext"] += f"/{column_list[j]}: " + str(df.loc[i,f"{column_list[j]}"].copy())
+            df.loc[i, "hovertext"] += f"/{column_list[j]}: " + str(df.loc[i,f"{column_list[j]}"])
+
+    df["hovertext"].fillna("결측치")
 
     return df
 
