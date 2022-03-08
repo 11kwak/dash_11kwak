@@ -13,6 +13,9 @@ def split_address(df):
     print("현재 컬럼명 : ",df.columns)
     time.sleep(1)
     address = input("주소명 컬럼을 입력하세요 :")
+
+    df[f"{address}"].fillna("결측치")
+
     df["광역시/도"] = df[f"{address}"].str.split(" ",expand=True)[0]
     df["시/군/구"] = df[f"{address}"].str.split(" ",expand=True)[1]
     df["동/읍/면"] = df[f"{address}"].str.split(" ",expand=True)[2]
@@ -24,11 +27,12 @@ def color_add(df):
     '''
     df를 input data로 받고 색깔add 컬럼이 추가된 df를 retrun 합니다. 
     '''
-    
     df["nodecolor"] = 0
     print("현재 컬럼명 : ",df.columns)
     time.sleep(1)
     target_col = input("색깔을 구분할 컬럼명을 입력하세요 :")
+    df[f"{target_col}"].fillna("결측치")
+
     target_col_values = df[f"{target_col}"].unique()
     print(f"색깔을 지정해줄 값들입니다 : {target_col_values}")
     time.sleep(1)
@@ -39,6 +43,7 @@ def color_add(df):
         pick_color = input(f"{target_col_values[i]}에 원하는 색깔 코드를 입력하세요 :")
         df.loc[df[f"{target_col}"] == f"{target_col_values[i]}", "nodecolor"] = pick_color
 
+        
     return df
 
 
@@ -60,7 +65,7 @@ def col_plus_col(df):
 
     for i in tqdm(range(len(df.index))):
         for j in range(len(column_list)):
-            df.loc[i, "hovertext"] += f"/{column_list[j]}: " + str(df.loc[i,f"{column_list[j]}"])
+            df.loc[i, "hovertext"] += f"/{column_list[j]}: " + str(df.loc[i,f"{column_list[j]}"].copy())
 
     return df
 
