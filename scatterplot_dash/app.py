@@ -20,7 +20,7 @@ blackbold={'color':'black', 'font-weight': 'bold'}
 
 #---------------------------------------------------------------
 #load data
-df = pd.read_csv("./data/data.csv",encoding="cp949")
+df = pd.read_csv("./data/dashdata.csv",encoding="cp949")
 
 #---------------------------------------------------------------
 app.layout = html.Div([
