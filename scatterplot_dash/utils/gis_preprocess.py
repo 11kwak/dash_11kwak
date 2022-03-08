@@ -40,6 +40,7 @@ def color_add(df):
         print("색깔을 지정해줄 값 :", target_col_values[i])
         time.sleep(1)
         print("색깔 별 코드 예시 : ", color_type)
+        time.sleep(1)
         pick_color = input(f"{target_col_values[i]}에 원하는 색깔 코드를 입력하세요 :")
         df.loc[df[f"{target_col}"] == f"{target_col_values[i]}", "nodecolor"] = pick_color
 
