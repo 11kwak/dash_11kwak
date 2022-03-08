@@ -15,8 +15,6 @@ app = dash.Dash(__name__)
 # mapbox_access_token = 'insert_your_mapbox_token_here'
 mapbox_access_token = ""
 
-# pk.eyJ1IjoiZG5qc2RsZjExMTMiLCJhIjoiY2t6aTI5ZW5vMWpqNDJvcGQwOWt6aXVvMyJ9.hHLYukMFqysa-8j0WBAMYA
-
 # blackbold
 blackbold={'color':'black', 'font-weight': 'bold'}
 
@@ -32,14 +30,13 @@ app.layout = html.Div([
         html.Div([
             # Map-legend
             html.Ul([
-                html.Li("2종-내진설계 미적용", className='circle', style={'background': '#f54242','color':'black',
-                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}),  # red 2종-내진설계미적용
-                html.Li("1종-내진설계 미적용", className='circle', style={'background': '#f542a7','color':'black',
-                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}), # pink
-                html.Li("2종-내진설계 적용", className='circle', style={'background': '#2500f5','color':'black',
-                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}),  #blue
-                html.Li("1종-내진설계 적용", className='circle', style={'background': '#009bf5','color':'black',
-                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}), #하늘색 
+                html.Li("내진설계 적용", className='circle', style={'background': '#3c979a','color':'black',
+                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}),  
+                html.Li("내진설계 미적용", className='circle', style={'background': '#f54242','color':'black',
+                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}), 
+                html.Li("내진설계 적용여부 모름", className='circle', style={'background': '#323232','color':'black',
+                    'list-style':'none','text-indent': '17px','white-space':'nowrap'}),  
+        
                
             ], style={'border-bottom': 'solid 3px', 'border-color':'#00FC87','padding-top': '6px'}
             ),
@@ -47,15 +44,15 @@ app.layout = html.Div([
             # Borough_checklist
             html.Label(children=['광역시: '], style=blackbold),
             dcc.Checklist(id='boro_name',
-                    options=[{'label':str(b),'value':b} for b in sorted(df['광역시'].unique())],
-                    value=[b for b in sorted(df['광역시'].unique())],
+                    options=[{'label':str(b),'value':b} for b in sorted(df['radio1'].unique())],
+                    value=[b for b in sorted(df['radio1'].unique())],
             ),
 
             # Recycling_type_checklist
-            html.Label(children=['교량타입: '], style=blackbold),
+            html.Label(children=['내진설계적용여부: '], style=blackbold),
             dcc.Checklist(id='recycling_type',
-                    options=[{'label':str(b),'value':b} for b in sorted(df['교량타입'].unique())],
-                    value=[b for b in sorted(df['교량타입'].unique())],
+                    options=[{'label':str(b),'value':b} for b in sorted(df['radio2'].unique())],
+                    value=[b for b in sorted(df['radio2'].unique())],
             ),
 
             # Web_link
@@ -92,20 +89,20 @@ app.layout = html.Div([
                Input('recycling_type', 'value')])
 
 def update_figure(chosen_boro,chosen_recycling):
-    df_sub = df[(df['광역시'].isin(chosen_boro)) &
-                (df['교량타입'].isin(chosen_recycling))]
+    df_sub = df[(df['radio1'].isin(chosen_boro)) &
+                (df['radio2'].isin(chosen_recycling))]
 
     # Create figure
     locations=[go.Scattermapbox(
-                    lon = df_sub['경도'],
-                    lat = df_sub['위도'],
+                    lon = df_sub['longitude'],
+                    lat = df_sub['latitude'],
                     mode='markers',
-                    marker={'color' : df_sub['색깔']},
+                    marker={'color' : df_sub['nodecolor']},
                     unselected={'marker' : {'opacity':1}},
                     selected={'marker' : {'opacity':0.5, 'size':25}},
                     hoverinfo='text',
-                    hovertext=df_sub['교량정보'],
-                    customdata=df_sub['시설물명']
+                    hovertext=df_sub['hovertext'],
+                    customdata=df_sub['nodename']
     )]
 
     # Return figure

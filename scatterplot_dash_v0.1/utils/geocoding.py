@@ -83,10 +83,10 @@ def geocoding_action(df):
 
     latitude_list, longitude_list = kakao_geocoding_to_list(addr)
 
-    df["위도"] = latitude_list
-    df["경도"] = longitude_list
+    df["latitude"] = latitude_list
+    df["longitude"] = longitude_list
 
-    idx = df[df["위도"]==0].index
+    idx = df[df["latitude"]==0].index
     print("##############################################################################################################")
     print("지오코딩에 실패한 행의 수 :", len(idx))
     print("지오코딩에 실패한 행의 인덱스 :", idx)

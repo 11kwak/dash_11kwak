@@ -25,7 +25,7 @@ def color_add(df):
     df를 input data로 받고 색깔add 컬럼이 추가된 df를 retrun 합니다. 
     '''
     
-    df["색깔add"] = 0
+    df["nodecolor"] = 0
     print("현재 컬럼명 : ",df.columns)
     time.sleep(1)
     target_col = input("색깔을 구분할 컬럼명을 입력하세요 :")
@@ -37,7 +37,7 @@ def color_add(df):
         time.sleep(1)
         print("색깔 별 코드 예시 : ", color_type)
         pick_color = input(f"{target_col_values[i]}에 원하는 색깔 코드를 입력하세요 :")
-        df.loc[df[f"{target_col}"] == f"{target_col_values[i]}", "색깔add"] = pick_color
+        df.loc[df[f"{target_col}"] == f"{target_col_values[i]}", "nodecolor"] = pick_color
 
     return df
 
