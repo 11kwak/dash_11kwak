@@ -96,4 +96,4 @@ def geocoding_action(df):
 
 
 if __name__ == "__main__":
-    print("모듈을 import 해서 실행파일에서 함수로 사용하세요.\nkakao_gecoding(address) : 주소를 입력하면 return latitude, longitude \nkakao_geocoding_list(addresslist) : 주소 리스트를 입력하면 return latitude_list, longitude_list ")
+    print("모듈을 import 해서 실행파일에서 함수로 사용하세요.")
