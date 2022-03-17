@@ -87,4 +87,4 @@ def geocoding_action(df):
 
 
 if __name__ == "__main__":
-    print("모듈을 import 해서 실행파일에서 함수로 사용하세요.")
+    print("df 변수 안에 데이터를 넣고 geocoding_action(df)를 사용하세요.")
